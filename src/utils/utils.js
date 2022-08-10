@@ -6,4 +6,4 @@ export const settings = {
     errorClass: 'popup__field_type_error'
 }
 
-export const token = '61665773-9bef-493e-b175-1f96c36b4614'
+export const token = '61665773-9bef-493e-b175-1f96c36b4614';

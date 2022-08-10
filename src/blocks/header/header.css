@@ -3,7 +3,9 @@
     margin: 45px auto 0;
     padding-bottom: 41px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
+    justify-items: center;
     width: 70%;
     border-bottom: 1px solid rgba(84, 84, 84, .7);
 }
