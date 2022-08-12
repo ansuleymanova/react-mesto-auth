@@ -7,7 +7,7 @@ export default function InfoTooltip(props) {
             <button type="button" className="popup__close-icon" aria-label="Закрыть" onClick={props.onClose}></button>
             <div className="popup__container">
                 <div className={imgClassName} />
-                <h2 className="popup__title popup__title_type_tip">{props.result ? "Вы успешно зарегистрировались!" : "Что-то пошло не так! Попробуйте еще раз."}</h2>
+                <h2 className="popup__title popup__title_type_tip">{props.text}</h2>
             </div>
 
         </div>

@@ -51,7 +51,11 @@ function App() {
             setLoggedIn(true);
             history.push('/');
           }
-        }).catch((err) => console.log(err));
+        }).catch((err) => {
+      console.log(err);
+      setSuccessfulRegister(false);
+      setIsInfoToolTipOpen(true);
+    });
   }
 
   function handleLogout() {
@@ -60,12 +64,7 @@ function App() {
   }
 
   function closeInfoToolTip() {
-    if (successfulRegister) {
       setIsInfoToolTipOpen(false);
-      history.push('/sign-in');
-    } else {
-      setIsInfoToolTipOpen(false);
-    }
   }
 
   function handleRegister() {
@@ -78,6 +77,7 @@ function App() {
         setPassword('');
         setSuccessfulRegister(true);
         setIsInfoToolTipOpen(true);
+        history.push('/sign-in');
       }
     }).catch((err) => {
       console.log(err);
@@ -94,6 +94,7 @@ function App() {
     auth.checkToken(token)
         .then((res) => {
           if (res) {
+            setEmail(res.email);
             setCurrentUser({ email: res.email });
             setLoggedIn(true);
             history.push('/');
@@ -162,12 +163,14 @@ function App() {
 
   useEffect(() => {
     handleTokenCheck();
-    Promise.all([api.getUserInfo(), api.getInitialCards()])
-        .then(([userInfo, initialCards]) => {
-          setCurrentUser(userInfo);
-          setCards(initialCards)
-        }).catch((err) => console.log(err))
-  }, [])
+    if (loggedIn) {
+      Promise.all([api.getUserInfo(), api.getInitialCards()])
+          .then(([userInfo, initialCards]) => {
+            setCurrentUser(userInfo);
+            setCards(initialCards)
+          }).catch((err) => console.log(err))
+    }
+  }, [loggedIn])
 
     return (
         <CurrentUserContext.Provider value={currentUser}>
@@ -210,7 +213,7 @@ function App() {
               <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit} />
               <PopupWithForm name="confirm" title="Вы уверены?" isOpen={isConfirmPopupOpen} onClose={closeAllPopups} buttonText="Да"></PopupWithForm>
               <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
-              <InfoTooltip isOpen={isInfoToolTipOpen} onClose={closeInfoToolTip} result={successfulRegister}/>
+              <InfoTooltip isOpen={isInfoToolTipOpen} onClose={closeInfoToolTip} text={successfulRegister ? "Вы успешно зарегистрировались!" : "Что-то пошло не так! Попробуйте еще раз."}/>
             </div>
           </div>
         </CurrentUserContext.Provider>
