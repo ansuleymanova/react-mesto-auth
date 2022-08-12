@@ -50,7 +50,7 @@ function App() {
             localStorage.setItem('email', email);
             setPassword('');
             setLoggedIn(true);
-            history.push('/');
+            history.push('/auth-mesto-react');
           }
         }).catch((err) => {
       console.log(err);
@@ -96,7 +96,7 @@ function App() {
           if (res) {
             setCurrentUser({email: res.data.email});
             setLoggedIn(true);
-            history.push('/');
+            history.push('/auth-mesto-react');
           }
         }).catch((err) => console.log(err))
   }
@@ -178,7 +178,7 @@ function App() {
               <Header handleLogout={handleLogout} />
               <Switch>
                 <ProtectedRoute
-                    exact path="/"
+                    path="/auth-mesto-react"
                     loggedIn={loggedIn}
                     component={Main}
                     onCardClick={handleCardClick}

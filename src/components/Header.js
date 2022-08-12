@@ -7,7 +7,7 @@ export default function Header(props) {
         <header className="header">
             <img alt="Mesto Россия" src={logo} className="header__logo" />
             <Switch>
-                <Route exact path="/">
+                <Route path="/auth-mesto-react">
                     <div className="header__info">
                         <p className="header__email">{localStorage.getItem('email')}</p>
                         <Link to="/sign-in" className="header__link" onClick={props.handleLogout}>Выйти</Link>
