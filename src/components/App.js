@@ -47,6 +47,7 @@ function App() {
     auth.authorize(email, password)
         .then((res) => {
           if (res.token) {
+            localStorage.setItem('email', email);
             setPassword('');
             setLoggedIn(true);
             history.push('/');
@@ -93,8 +94,7 @@ function App() {
     auth.checkToken(token)
         .then((res) => {
           if (res) {
-            setEmail(res.email);
-            setCurrentUser({ email: res.email });
+            setCurrentUser({email: res.data.email});
             setLoggedIn(true);
             history.push('/');
           }
@@ -175,7 +175,7 @@ function App() {
         <CurrentUserContext.Provider value={currentUser}>
           <div className="App">
             <div className="page">
-              <Header email={email} handleLogout={handleLogout} />
+              <Header handleLogout={handleLogout} />
               <Switch>
                 <ProtectedRoute
                     exact path="/"

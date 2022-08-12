@@ -1,3 +1,5 @@
+import {useContext} from 'react';
+
 export default function InfoTooltip(props) {
     const className = `popup ${props.isOpen && 'popup_opened'}`;
     const imgClassName = `popup__icon popup__icon_type_${props.result ? "success" : "unsuccess"}`;
