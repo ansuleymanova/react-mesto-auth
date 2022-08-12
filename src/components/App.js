@@ -73,7 +73,6 @@ function App() {
     }
     auth.register(password, email).then((res) => {
       if (res.statusCode !== 400) {
-        setEmail('');
         setPassword('');
         setSuccessfulRegister(true);
         setIsInfoToolTipOpen(true);
